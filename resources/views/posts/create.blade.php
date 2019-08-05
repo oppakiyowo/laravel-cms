@@ -27,61 +27,61 @@
                         </li>
                     </ul>
                 </div>
-                <div class="row">
-                        <div class="col-12 col-md-8">
-                            <div class="card">
-                                   
-                                <div class="card-body">
+<div class="row">
+    <div class="col-12 col-md-8">
+        <div class="card">
+                    
+        <div class="card-body">
 
-                                       <form action="{{ isset($post) ? route('posts.update',$post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data"> 
-                                        @csrf    
-                                
-                                        @if(isset($post))
-                                            @method('PUT')
-                                        @endif
-                                
-                                        <div class="form-group">
-                                        <label for="title">Title</label>
-                                        <input type="text" class="form-control" name="title" id="title" value=" {{ old('title') }} {{ isset($post) ? $post->title : ''}}">
-                                        </div>
+                <form action="{{ isset($post) ? route('posts.update',$post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data"> 
+                @csrf    
+        
+                @if(isset($post))
+                    @method('PUT')
+                @endif
+        
+                <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title" value=" {{ old('title') }} {{ isset($post) ? $post->title : ''}}">
+                </div>
 
-                                        <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea name="description" id="description" cols="3" rows="3" class="form-control"> {{ old('description') }} {{ isset($post) ? $post->description:''}}</textarea> 
-                                        </div>
-                                
-                                        <div class="form-group">
-                                        <label for="content">Content</label>
-                                        <input id="content" type="hidden" name="content" value=" {{ old('content') }} {{ isset($post) ? $post->content: ''}}">
-                                        <trix-editor input="content"></trix-editor>
-                                        
-                                        </div>
-                                
-                                        
-                                
-                                        @if(isset($post))
-                                        <div class="form-group">
-                                        <img src="{{ URL::asset('storage/'.$post->image) }}" alt="" style="width:100%">
-                                        </div>
-                                        @endif
-                                
-                                        <div class="form-group">
-                                        <label for="image"> Image </label>
-                                        <input type="file" class="form-control" name="image" id="image" value=" {{ old('image') }}">
-                                        </div>
-                                
-                                        
-                                
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus"> {{ isset($post) ? 'Edit Post' : 'Tambah Post'}} </i> </button>
-                                        </div> 
-                                    
-                                        
-                                    
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="3" rows="3" class="form-control"> {{ old('description') }} {{ isset($post) ? $post->description:''}}</textarea> 
+                </div>
+        
+                <div class="form-group">
+                <label for="content">Content</label>
+                <input id="content" type="hidden" name="content" value=" {{ old('content') }} {{ isset($post) ? $post->content: ''}}">
+                <trix-editor input="content"></trix-editor>
+                
+                </div>
+        
+                
+        
+                @if(isset($post))
+                <div class="form-group">
+                <img src="{{ URL::asset('storage/'.$post->image) }}" alt="" style="width:100%">
+                </div>
+                @endif
+        
+                <div class="form-group">
+                <label for="image"> Image </label>
+                <input type="file" class="form-control" name="image" id="image" value=" {{ old('image') }}">
+                </div>
+        
+                
+        
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus"> {{ isset($post) ? 'Edit Post' : 'Tambah Post'}} </i> </button>
+                </div> 
+            
                         
+                    
+                </div>
+            </div>
+        </div>
+        
                         <div class="col-6 col-md-4">
                             <div class="card">
                                 <div class="card-body">
@@ -93,34 +93,28 @@
                                          </div>
                                          @endif
                                          <div class="form-group">
-                                                <label for="category">Category</label>
-                                                <select name="category" id="category" class="form-control">
-                                                    @foreach($categories as $category)
-                                                    <option value="{{ old('category') }} {{ $category->id }}" 
-                                                        @if (isset($post))
-                                    
-                                                        @if($category->id == $post->id)
-                                                        selected
-                                                        @endif
-                                    
-                                                        @endif
-                                                        
-                                                        >
-                                                    {{ $category->name }}
-                                                     </option>
-                                                    @endforeach
-                                                </select>
+                                            <label for="category">Category</label>
+                                            <select name="category" id="category" class="form-control">
+                                                @foreach($categories as $category)
+                                                <option value="{{ old('category') }} {{ $category->id }}" 
+                                                    @if (isset($post))
+                                
+                                                    @if($category->id == $post->id)
+                                                    selected
+                                                    @endif
+                                                    @endif
+                                                    >
+                                                {{ $category->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             </div>
                                 
                                         <div class="form-group">
-                                                <label for="published_at">Published At</label>
-                                                <input type="text" class ="form-control" name="published_at" id="published_at" value="{{ old('published_at') }} {{ isset($post) ? $post->published_at: ''}}">
-                                                </div>
-
-                                                
-                                            
+                                            <label for="published_at">Published At</label>
+                                            <input type="text" class ="form-control" name="published_at" id="published_at" value="{{ old('published_at') }} {{ isset($post) ? $post->published_at: ''}}">
+                                        </div>
                                                     <div class="form-group">
-                                                        
                                                        @if($tags->count() >0)
                                                        <label for="tags">Tags</label>   
                                                        <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
