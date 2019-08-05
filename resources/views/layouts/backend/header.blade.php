@@ -27,6 +27,7 @@
 
 	<!-- CSS Files -->
 	<link  href="{{ asset('css/trix.css') }}" rel="stylesheet">
+	<link  href="{{ asset('assets/css/fonts.css') }}" rel="stylesheet">
     <link  href="{{ asset('css/flatpicker.css') }}" rel="stylesheet">
     <link  href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -34,6 +35,8 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
+
+	
 
 
 </head>
@@ -44,7 +47,7 @@
 				<div class="logo-header" data-background-color="blue">
 					
 					<a href="{{ route('welcome') }}" class="logo">
-						<img src="../assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+						<img src="{{ asset('assets/img/logo.svg') }}" alt="navbar brand" class="navbar-brand">
 					</a>
 					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon">
