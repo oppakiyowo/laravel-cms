@@ -90,7 +90,7 @@ class postscontroller extends Controller
     {
         $post =Post::where('slug', $slug)->firstorFail();
         
-        return view('posts.create')
+        return view('posts.edit')
         ->with('post', $post)
         ->with('categories',Category::all())
         ->with('tags',Tag::all());
