@@ -22,9 +22,8 @@
 	</script>
 	 
 	 <script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
-	 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+	 <link  href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+	 <script src="{{ asset('js/toastr.min.js') }}"></script>
 	<!-- CSS Files -->
 	<link  href="{{ asset('css/trix.css') }}" rel="stylesheet">
 	<link  href="{{ asset('assets/css/fonts.css') }}" rel="stylesheet">
