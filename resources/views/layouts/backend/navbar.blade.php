@@ -42,7 +42,7 @@
                                         <span class="text">Create New Database</span>
                                     </div>
                                 </a>
-                                <a class="col-6 col-md-4 p-0" href="{{ route('posts.create') }}"">
+                                <a class="col-6 col-md-4 p-0" href="{{ route('posts.create') }}">
                                     <div class="quick-actions-item">
                                         <i class="flaticon-pen"></i>
                                         <span class="text">Create New Post</span>
