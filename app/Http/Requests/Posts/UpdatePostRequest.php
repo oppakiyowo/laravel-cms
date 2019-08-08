@@ -26,12 +26,14 @@ class UpdatePostRequest extends FormRequest
         return [
 
             'title' => 'required|unique:posts,title,'.$this->post['id'],
-            'slug' => 'unique:posts,slug,'.$this->post['id'],
+            'slug' => 'required|unique:posts,slug,'.$this->post['id'],
             'description'=>'required',
             'content' => 'required',
-            'category' => 'required'
+            'category_id' => 'required'
        
 
         ];
     }
 }
+
+       
