@@ -106,17 +106,9 @@
                                         <span class="sub-item">Trashed Post</span>
                                     </a>
                                 </li>
-                               
                             </ul>
                         </div>
                     </li>
-                    
-                  
-                  
-                   
-                  
-                    
-                   
                 </ul>
             </div>
         </div>

@@ -98,7 +98,10 @@
             
                                                                     
                                                                     <div class="form-group">
-                                                                    <input type="text" id="name" class="form-control" name="name"  value="" placeholder="Isi Disini">
+                                                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name"  value="" placeholder="Isi Disini">
+                                                                    @error('name')
+                                                                    <td><p class="text-danger">{{$message}}</p></td>
+                                                                    @enderror
                                                                     </div>
                                                             
                                                                     <div class="form-group">

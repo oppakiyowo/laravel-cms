@@ -89,13 +89,16 @@
                                 <form action="{{ route('categories.store')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" id="name" class="form-control" name="name"
+                                        <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name"
                                             placeholder="Isi Disini" value="">
+                                            @error('name')
+                                            <td><p class="text-danger">{{$message}}</p></td>
+                                            @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <button class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus">
-                                                Kategory </i> </button>
+                                         Kategory </i> </button>
                                     </div>
                                 </form>
                             </div>

@@ -1,11 +1,11 @@
-@if($errors->any())
+{{-- @if($errors->any())
         @foreach($errors->all() as $error)
         <script>
             toastr.error("{{ $error }} ",'FAILED');
          </script>
         @endforeach
 @endif
-<!-- validasi  untuk notifikasi field yang tidak di isi -->
+<!-- validasi  untuk notifikasi field yang tidak di isi --> --}}
 
 @if(session()->has('success'))
 <script>  
