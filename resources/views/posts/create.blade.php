@@ -33,51 +33,46 @@
                     
         <div class="card-body">
 
-                <form action="{{ isset($post) ? route('posts.update',$post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data"> 
+                <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data"> 
                 @csrf    
-        
-                @if(isset($post))
-                    @method('PUT')
-                @endif
         
                 <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" name="title" id="title" value=" {{ old('title') }} {{ isset($post) ? $post->title : ''}}">
+                <input type="text" class="form-control @error('title')  is-invalid @enderror" name="title" id="title" value=" {{ old('title') }} ">
+                @error('title')
+                <td><p class="text-danger">{{$message}}</p></td>
+                @enderror
                 </div>
 
                 <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" cols="3" rows="3" class="form-control"> {{ old('description') }} {{ isset($post) ? $post->description:''}}</textarea> 
+                <textarea name="description" id="description" cols="3" rows="3" class="form-control @error('description')  is-invalid @enderror"> {{ old('description') }} {{ isset($post) ? $post->description:''}}</textarea> 
+                @error('description')
+                <td><p class="text-danger">{{$message}}</p></td>
+                @enderror
                 </div>
         
                 <div class="form-group">
                 <label for="content">Content</label>
-                <input id="content" type="hidden" name="content" value=" {{ old('content') }} {{ isset($post) ? $post->content: ''}}">
+                <input id="content" class="@error('title')  is-invalid @enderror" type="hidden" name="content" value=" {{ old('content') }} ">
                 <trix-editor input="content"></trix-editor>
-                
+                @error('content')
+                <td><p class="text-danger">{{$message}}</p></td>
+                @enderror
                 </div>
-        
-                
-        
-                @if(isset($post))
-                <div class="form-group">
-                <img src="{{ URL::asset('storage/'.$post->image) }}" alt="" style="width:100%">
-                </div>
-                @endif
+    
         
                 <div class="form-group">
                 <label for="image"> Image </label>
-                <input type="file" class="form-control" name="image" id="image" value=" {{ old('image') }}">
+                <input type="file" class="form-control  @error('image')  is-invalid @enderror" name="image" id="image" value=" {{ old('image') }}">
+                @error('image')
+                <td><p class="text-danger">{{$message}}</p></td>
+                @enderror
                 </div>
-        
-                
-        
+
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus"> {{ isset($post) ? 'Edit Post' : 'Tambah Post'}} </i> </button>
+                    <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus">Tambah Post</i> </button>
                 </div> 
-            
-                        
-                    
                 </div>
             </div>
         </div>
@@ -85,25 +80,13 @@
                         <div class="col-6 col-md-4">
                             <div class="card">
                                 <div class="card-body">
-
-                                        @if(isset($post))
-                                        <div class="form-group">
-                                                <label for="title">Permalink</label>
-                                                <input type="text" class="form-control" name="slug" id="slug" value="{{ isset($post) ? $post->slug: ''}}">
-                                         </div>
-                                         @endif
                                          <div class="form-group">
                                             <label for="category">Category</label>
-                                            <select name="category" id="category" class="form-control">
+                                            <select name="category" id="category" class="form-control"> 
                                                 @foreach($categories as $category)
                                                 <option value="{{ old('category') }} {{ $category->id }}" 
-                                                    @if (isset($post))
-                                
-                                                    @if($category->id == $post->id)
-                                                    selected
-                                                    @endif
-                                                    @endif
-                                                    >
+                                                   
+                                                    > 
                                                 {{ $category->name }}
                                                     </option>
                                                 @endforeach
@@ -120,11 +103,7 @@
                                                        <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
                                                         @foreach($tags as $tag) 
                                                         <option value=" {{ $tag->id }}"
-                                                             @if(isset($post))
-                                                             @if($post->hasTag($tag->id))
-                                                             selected
-                                                             @endif
-                                                             @endif
+                                                            
                                                             >
                                                         {{ $tag->name }}
                                                         </option>  

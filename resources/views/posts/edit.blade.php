@@ -6,7 +6,7 @@
         <div class="content">
                 <div class="page-inner">
                 <div class="page-header">
-                    <h4 class="page-title"> CREATE POST PANEL</h4>
+                    <h4 class="page-title">EDIT POST PANEL</h4>
                         <ul class="breadcrumbs">
                             <li class="nav-home">
                                 <a href="{{ route('home') }}">
@@ -29,25 +29,20 @@
                 </div>
 <div class="row">
     <div class="col-12 col-md-8">
-        <div class="card">
-                    
-        <div class="card-body">
+        <div class="card">          
+             <div class="card-body">
 
-                <form action="{{ isset($post) ? route('posts.update',$post->id) : route('posts.store') }}" method="POST" enctype="multipart/form-data"> 
+                <form action="{{ route('posts.update',$post->id)  }}" method="POST" enctype="multipart/form-data"> 
                 @csrf    
-        
-                @if(isset($post))
-                    @method('PUT')
-                @endif
-        
+                @method('PUT')
+                
                 <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value=" {{ old('title') }} {{ isset($post) ? $post->title : ''}}">
-                </div>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value=" {{ old('title') }} {{ $post->title }}">
                 @error('title')
                 <td><p class="text-danger">{{$message}}</p></td>
-                 @enderror
-            
+                @enderror
+                </div>
             
                 <div class="form-group">
                 <label for="description">Description</label>
@@ -56,99 +51,92 @@
                 <td><p class="text-danger">{{$message}}</p></td>
                 @enderror
                 </div>
-              
-        
-
-             
 
                 <div class="form-group">
                 <label for="content">Content</label>
-                <input id="content" type="hidden" name="content" value=" {{ old('content') }} {{ isset($post) ? $post->content: ''}}">
+                <input id="content" class="form-control @error('content') is-invalid @enderror" type="hidden" name="content" value=" {{ old('content') }} {{  $post->content }}">
                 <trix-editor input="content"></trix-editor>
-                
+                @error('content')
+                <td><p class="text-danger">{{$message}}</p></td>
+                @enderror
                 </div>
         
-                
-        
-                @if(isset($post))
                 <div class="form-group">
                 <img src="{{ URL::asset('storage/'.$post->image) }}" alt="" style="width:100%">
                 </div>
-                @endif
-        
+            
                 <div class="form-group">
                 <label for="image"> Image </label>
                 <input type="file" class="form-control" name="image" id="image" value=" {{ old('image') }}">
                 </div>
         
-                
-        
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus"> {{ isset($post) ? 'Edit Post' : 'Tambah Post'}} </i> </button>
+                    <button type="submit" class="btn btn-primary btn-round ml-auto"> <i class="fa fa-plus"> Edit Post </i> </button>
                 </div> 
-            
-                        
-                    
-                </div>
             </div>
         </div>
+    </div>
         
-                        <div class="col-6 col-md-4">
-                            <div class="card">
-                                <div class="card-body">
+        <div class="col-6 col-md-4">
+        <div class="card">
+            <div class="card-body">
 
-                                        @if(isset($post))
-                                        <div class="form-group">
-                                                <label for="title">Permalink</label>
-                                                <input type="text" class="form-control" name="slug" id="slug" value="{{ isset($post) ? $post->slug: ''}}">
-                                         </div>
-                                         @endif
-                                         <div class="form-group">
-                                            <label for="category">Category</label>
-                                            <select name="category" id="category" class="form-control">
-                                                @foreach($categories as $category)
-                                                <option value="{{ old('category') }} {{ $category->id }}" 
-                                                    @if (isset($post))
-                                
-                                                    @if($category->id == $post->id)
-                                                    selected
-                                                    @endif
-                                                    @endif
-                                                    >
-                                                {{ $category->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            </div>
-                                
-                                        <div class="form-group">
-                                            <label for="published_at">Published At</label>
-                                            <input type="text" class ="form-control" name="published_at" id="published_at" value="{{ old('published_at') }} {{ isset($post) ? $post->published_at: ''}}">
-                                        </div>
-                                                    <div class="form-group">
-                                                       @if($tags->count() >0)
-                                                       <label for="tags">Tags</label>   
-                                                       <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
-                                                        @foreach($tags as $tag) 
-                                                        <option value=" {{ $tag->id }}"
-                                                             @if(isset($post))
-                                                             @if($post->hasTag($tag->id))
-                                                             selected
-                                                             @endif
-                                                             @endif
-                                                            >
-                                                        {{ $tag->name }}
-                                                        </option>  
-                                                        @endforeach
-                                                    </select>
-                                                    </div>
-                                                    @endif
-                                </div>
-                            </form>
-
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="slug">Permalink</label>
+                        <input name="slug" id="slug" type="text" class="form-control @error('slug') is-invalid @enderror"  
+                        value="{{ $post->slug }}">
+                        @error('slug')
+                        <td><p class="text-danger">{{$message}}</p></td>
+                        @enderror
                     </div>
+
+                    <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category_id" id="category_id" class="form-control  @error('category') is-invalid @enderror">
+                                @foreach($categories as $category)
+                                <option value="{{ old('category_id') }} {{ $category->id }}" 
+                                        @if($category->id == $post->category_id)
+                                        selected
+                                        @endif
+                                >
+                                {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                            <td><p class="text-danger">{{$message}}</p></td>
+                            @enderror
+                    </div>
+        
+
+                    <div class="form-group">
+                            @if($tags->count() >0)
+                            <label for="tags">Tags</label>   
+                            <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
+                            @foreach($tags as $tag) 
+                                <option value=" {{ $tag->id }}"
+                                    @if($post->hasTag($tag->id))
+                                    selected
+                                    @endif
+                                >
+                            {{ $tag->name }}
+                            </option>  
+                            @endforeach
+                        </select>
+                        </div>
+                    
+                <div class="form-group">
+                    <label for="published_at">Published At</label>
+                    <input type="text" class ="form-control" name="published_at" id="published_at" value="{{ old('published_at') }} {{  $post->published_at }}">
+                </div>
+
+             
+                @endif
+                </div>
+            </form>
+         </div>
+    </div>
+</div>
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
@@ -193,100 +181,6 @@ $(document).ready(function() {
 <!-- Atlantis DEMO methods, don't include it in your project! -->
 <script src="../assets/js/setting-demo.js"></script>
 <script src="../assets/js/demo.js"></script>
-<script>
-Circles.create({
-    id:'circles-1',
-    radius:45,
-    value:60,
-    maxValue:100,
-    width:7,
-    text: 5,
-    colors:['#f1f1f1', '#FF9E27'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-Circles.create({
-    id:'circles-2',
-    radius:45,
-    value:70,
-    maxValue:100,
-    width:7,
-    text: 36,
-    colors:['#f1f1f1', '#2BB930'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-Circles.create({
-    id:'circles-3',
-    radius:45,
-    value:40,
-    maxValue:100,
-    width:7,
-    text: 12,
-    colors:['#f1f1f1', '#F25961'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-var mytotalIncomeChart = new Chart(totalIncomeChart, {
-    type: 'bar',
-    data: {
-        labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-        datasets : [{
-            label: "Total Income",
-            backgroundColor: '#ff9e27',
-            borderColor: 'rgb(23, 125, 255)',
-            data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-        }],
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-            display: false,
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    display: false //this will remove only the label
-                },
-                gridLines : {
-                    drawBorder: false,
-                    display : false
-                }
-            }],
-            xAxes : [ {
-                gridLines : {
-                    drawBorder: false,
-                    display : false
-                }
-            }]
-        },
-    }
-});
-
-$('#lineChart').sparkline([105,103,123,100,95,105,115], {
-    type: 'line',
-    height: '70',
-    width: '100%',
-    lineWidth: '2',
-    lineColor: '#ffa534',
-    fillColor: 'rgba(255, 165, 52, .14)'
-});
-</script>
 
 <script >
         $(document).ready(function() {
