@@ -54,8 +54,7 @@
         
                 <div class="form-group">
                 <label for="content">Content</label>
-                <input id="content" class="@error('title')  is-invalid @enderror" type="hidden" name="content" value=" {{ old('content') }} ">
-                <trix-editor input="content"></trix-editor>
+                <textarea id="content" class="form-control @error('content')  is-invalid @enderror" name="content" rows="10" cols="50" >{{ old('content') }}</textarea>
                 @error('content')
                 <td><p class="text-danger">{{$message}}</p></td>
                 @enderror
@@ -97,26 +96,58 @@
                                             <label for="published_at">Published At</label>
                                             <input type="text" class ="form-control" name="published_at" id="published_at" value="{{ old('published_at') }} {{ isset($post) ? $post->published_at: ''}}">
                                         </div>
-                                                    <div class="form-group">
-                                                       @if($tags->count() >0)
-                                                       <label for="tags">Tags</label>   
-                                                       <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
-                                                        @foreach($tags as $tag) 
-                                                        <option value=" {{ $tag->id }}"
-                                                            
-                                                            >
-                                                        {{ $tag->name }}
-                                                        </option>  
-                                                        @endforeach
-                                                    </select>
-                                                    </div>
-                                                    @endif
+                                        <div class="form-group">
+                                            @if($tags->count() >0)
+                                            <label for="tags">Tags</label>   
+                                            <select name="tags[]" id="tags" class="form-control tags-selector" multiple>
+                                            @foreach($tags as $tag) 
+                                            <option value=" {{ $tag->id }}"
+                                                
+                                                >
+                                            {{ $tag->name }}
+                                            </option>  
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                        @endif
                                 </div>
                             </form>
 
                             </div>
                         </div>
                     </div>
+
+
+<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script> 
+
+<script>
+        var options = {
+          filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+          filebrowserImageUploadUrl: 'laravel-filemanager/upload?type=Images&_token=',
+          filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+          filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+      </script>
+
+
+<script>
+    CKEDITOR.replace('content', options);
+    CKEDITOR.config.allowedContent = true;
+    
+ </script>
+
+  
+
+
+{{-- package ckeditor --}}
+<link href="{{ asset('ckeditor/plugins/codesnippet/lib/highlight/styles/default.css') }}" rel="stylesheet">
+
+<script src="{{ asset('ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{{-- package ckeditor  snippet highlight--}}
+
+
+
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>

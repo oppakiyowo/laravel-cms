@@ -108,6 +108,13 @@
                                 </li>
                             </ul>
                         </div>
+                        
+                                <li class="nav-item">
+                                    <a href="/laravel-filemanager?type=Images">
+                                     <i class="fas fa-folder-open"></i>
+                                        <p>File Manager</p>
+                                    </a>
+                           
                     </li>
                 </ul>
             </div>

@@ -41,3 +41,7 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::post('users/{user}make-writer','userscontroller@undoadmin')->name('users.make-writer');
  
 });
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});

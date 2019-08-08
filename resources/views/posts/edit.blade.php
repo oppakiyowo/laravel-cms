@@ -52,15 +52,16 @@
                 @enderror
                 </div>
 
+             
                 <div class="form-group">
-                <label for="content">Content</label>
-                <input id="content" class="form-control @error('content') is-invalid @enderror" type="hidden" name="content" value=" {{ old('content') }} {{  $post->content }}">
-                <trix-editor input="content"></trix-editor>
-                @error('content')
-                <td><p class="text-danger">{{$message}}</p></td>
-                @enderror
+                    <label for="content">Content</label>
+                    <textarea id="content" class="form-control @error('content')  is-invalid @enderror" name="content" rows="10" cols="50" >{{ old('content') }} {{  $post->content }}</textarea>
+                    @error('content')
+                    <td><p class="text-danger">{{$message}}</p></td>
+                    @enderror
                 </div>
-        
+    
+
                 <div class="form-group">
                 <img src="{{ URL::asset('storage/'.$post->image) }}" alt="" style="width:100%">
                 </div>
@@ -137,6 +138,36 @@
          </div>
     </div>
 </div>
+
+
+<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script> 
+
+<script>
+        var options = {
+          filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+          filebrowserImageUploadUrl: 'laravel-filemanager/upload?type=Images&_token=',
+          filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+          filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+      </script>
+
+
+<script>
+    CKEDITOR.replace('content', options);
+    CKEDITOR.config.allowedContent = true;
+    
+ </script>
+
+  
+
+
+{{-- package ckeditor --}}
+<link href="{{ asset('ckeditor/plugins/codesnippet/lib/highlight/styles/default.css') }}" rel="stylesheet">
+
+<script src="{{ asset('ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{{-- package ckeditor  snippet highlight--}}
+
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
