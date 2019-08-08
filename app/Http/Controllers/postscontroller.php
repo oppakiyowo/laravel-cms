@@ -147,14 +147,14 @@ class postscontroller extends Controller
         if ($post->trashed()){
             $post->deleteImage();
             $post->forceDelete();
-            session()->flash('success', 'Post berhasil di delete');
+            session()->flash('success', 'Post berhasil di delete permanen');
         }else {
             $post->delete();
             session()->flash('success', 'Post berhasil Masuk ke Trash');
         }
 
        
-       return redirect(route('posts.index'));
+       return redirect(route('trashed-post.index'));
     }
 
 
@@ -164,7 +164,8 @@ class postscontroller extends Controller
     {
         $trashed =Post::onlyTrashed()->get();
 
-        return view('posts.index')->with('posts', $trashed);
+        return view('posts.trash')->with('posts', $trashed);
+        
     }
 
     public function restore($id)
