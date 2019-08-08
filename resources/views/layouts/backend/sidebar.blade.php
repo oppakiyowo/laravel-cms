@@ -79,18 +79,7 @@
                         </a>
                         <div class="collapse" id="base">
                             <ul class="nav nav-collapse">
-                                <li>
-                                 @if(auth()->User()->isAdmin())
-                                    <a href="{{ route('users.index') }}">
-                                        <span class="sub-item">Users</span>
-                                    </a>
-                                    @endif
-                                </li>
-                                <li>
-                                    <a href="{{ route('posts.index') }}">
-                                        <span class="sub-item">Posts</span>
-                                    </a>
-                                </li>
+                              
                                 <li>
                                     <a href="{{route('categories.index')}}">
                                         <span class="sub-item">Categories</span>
@@ -101,24 +90,53 @@
                                         <span class="sub-item">Tags</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('trashed-post.index') }}">
-                                        <span class="sub-item">Trashed Post</span>
-                                    </a>
-                                </li>
                             </ul>
                         </div>
-                        
-                                <li class="nav-item">
-                                    <a href="/laravel-filemanager?type=Images">
-                                     <i class="fas fa-folder-open"></i>
-                                        <p>File Manager</p>
+                       
+                            
+                            <li class="nav-item">
+                                <a href="{{ route('posts.index') }}">
+                                <i class="fas fa-file-alt"></i>
+                                    <p>Posts</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                    <a href="{{ route('categories.index') }}">
+                                    <i class="fas fa-bars"></i>
+                                        <p>Categories</p>
                                     </a>
-                           
-                    </li>
+                                </li>
+
+                                <li class="nav-item">
+                                        <a href="{{ route('categories.index') }}">
+                                        <i class="fas fa-tag"></i>
+                                            <p>Tags</p>
+                                        </a>
+                                    </li>
+                               
+                            @if(auth()->User()->isAdmin())
+                            <li class="nav-item">
+                                    <a href="{{ route('users.index') }}">
+                                    <i class="fas fa-user-friends"></i>
+                                        <p>Users</p>
+                                    </a>
+                                </li>
+                            @endif
+                    
+                            <li class="nav-item">
+                                <a href="/laravel-filemanager?type=Images">
+                                    <i class="fas fa-folder-open"></i>
+                                    <p>File Manager</p>
+                                </a>
+                            </li>    
                 </ul>
             </div>
+            <li class="mx-4 mt-5">
+                    <a href="{{ route('trashed-post.index') }}" class="btn btn-danger btn-block"><span class="btn-label mr-2"> <i class="fa fa-trash"></i> </span>Trashed Post</a> 
+                </li>
         </div>
+        
     </div>
     <!-- End Sidebar -->
 
