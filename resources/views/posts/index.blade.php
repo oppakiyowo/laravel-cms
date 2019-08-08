@@ -48,8 +48,6 @@
                             <th>Category</th>
                             <th width="220px">publish date</th>
                             <th>Action</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -57,88 +55,43 @@
                         <tr>
                             @foreach ($posts as $post)
                             <td>
-                                @if(!$post->trashed())
                                 <a href="{{ route('blog.show', $post->slug) }}" target="_blank">
-                                    @endif
                                     <img class="img-fluid"
                                         src="{{ URL::asset('storage/'.$post->image) }}" height="80px"
                                         width="120px" alt="">
                                 </a>
                             </td>
                             <td>
-                                @if(!$post->trashed())
-                                <a href="{{ route('blog.show', $post->slug) }}" target="_blank">
-                                    @endif
+                                <a href="{{ route('blog.show', $post->slug) }}" target="_blank">   
                                     {{ $post->title }}
-
                                 </a>
                             </td>
-
-
                             <td>
                                 <a href="{{ route('categories.edit',$post->category->slug) }}">
                                     {{ $post->category->name }}</a>
                             </td>
-
-
                             <td>{{ $post->published_at }} |
                                 {!! $post->publicationLabel() !!}
                             </td>
-
-
-                            @if(!$post->trashed())
                             <td>
                                 <div class="form-button-action">
                                     <a href="{{ route('posts.edit',$post->slug) }}"
                                         class="btn btn-link btn-primary btn-lg" data-toggle="tooltip"
                                         title="" data-original-title="Edit Post"><i
                                             class="fa fa-edit"></i></a>
-                                            @if(auth()->User()->isAdmin())
+                            @if(auth()->User()->isAdmin())
                                     <form action="{{ route('posts.destroy',$post->id ) }}"
                                         method="POST">
                                         @csrf
                                         @method ('DELETE')
-
-                                         
                                         <button data-toggle="tooltip" title=""
                                             class="btn btn-link btn-danger"
                                             data-original-title="Trash Post">
-                                            <i class="fa fa-trash"></i>
-                                            @endif
+                                            <i class="fa fa-trash"></i>   
                                     </form>
+                                    @endif
                                 </div>
-                            </td>
-                            @else
-                            @if(auth()->User()->isAdmin())
-                            <td>
-                                <div class="form-button-action">
-                                    <form action="{{ route('posts.destroy',$post->id ) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method ('DELETE')
-
-                                        <button data-toggle="tooltip" title=""
-                                            class="btn btn-link btn-danger"
-                                            data-original-title="Delete Permanently">
-                                            <i class="fa fa-times"></i>
-
-
-                                    </form>
-
-                                    <form action="{{ route('restore-post',$post->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" data-toggle="tooltip" title=""
-                                            class="btn btn-link btn-info"
-                                            data-original-title="Restore Post">
-                                            <i class="fas fa-undo-alt"></i>
-                                    </form>
-                                </div>
-                                @endif
-                                @endif
-                            </td>
-
-
+                            </td>  
                         </tr>
                         @endforeach
                     </tbody>
@@ -146,7 +99,6 @@
                 @else
                 <h3 class="text-center">No Post Yet</h3>
                 @endif
-
             </div>
         </div>
     </div>
