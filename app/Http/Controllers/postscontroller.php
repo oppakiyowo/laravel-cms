@@ -112,35 +112,25 @@ class postscontroller extends Controller
             'description',
             'published_at',
             'content',
-            'category',
             'slug',
-            'category_id' => $request->category
+            'category_id' => $request->category,
 
             ]);
-     
     
-        if ($request->hasFile('image')){
-        $image = $request->image->store('store');
-        $post->deleteImage();
-        $data['image'] =$image;
+            if ($request->hasFile('image')){
+            $image = $request->image->store('store');
+            $post->deleteImage();
+            $data['image'] =$image;
+             }
 
-       
+            if ($request->tags){
+                $post->tags()->sync($request->tags);
+            }
 
-        }
+            $post->update($data);
+            session()->flash('success', 'Post berhasil di ubah');
 
-        if ($request->tags){
-            $post->tags()->sync($request->tags);
-        }
-
-       
-   
-
-        $post->update($data);
-        session()->flash('success', 'Post berhasil di ubah');
-
-        return redirect(route('posts.index'))->with('categories',Category::all());
-       
-
+            return redirect(route('posts.index'))->with('categories',Category::all());
     }
 
     /**
