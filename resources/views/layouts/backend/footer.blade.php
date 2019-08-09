@@ -29,8 +29,41 @@
 </footer>
 </div>
 
-<!--   Core JS Files   -->
+{{-- package ckeditor  & unisharp filemanager --}}
+<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script> 
+<script>
+        var options = {
+          filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+          filebrowserImageUploadUrl: 'laravel-filemanager/upload?type=Images&_token=',
+          filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+          filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+</script>
 
+<script>
+    CKEDITOR.replace('content', options);
+    CKEDITOR.config.allowedContent = true; 
+ </script>
+<script src="{{ asset('ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js') }}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{{-- end of package ckeditor  & unisharp filemanager --}}
+
+{{-- package select2 for category and flatpicker for date & time --}}
+<script src="{{ asset('js/select2.min.js') }}"></script>
+<script src="{{ asset('js/flatpicker.js') }}"></script>
+<script>
+    flatpickr('#published_at',{
+    enableTime: true,
+    enableSeconds: true
+    })
+
+    $(document).ready(function() {
+        $('.tags-selector').select2();
+    });
+</script>
+{{-- end of package select2 for category and flatpicker for date & time --}}
+
+<!--   Core JS Files   -->
 
 <script src="{{ asset ('assets/js/core/popper.min.js') }}"></script>
 <script src="{{ asset ('assets/js/core/bootstrap.min.js') }}"></script>
@@ -51,111 +84,10 @@
 <!-- jQuery Vector Maps -->
 <script src="{{ asset('assets/js/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
-
 <!-- Atlantis JS -->
 <script src="{{ asset('assets/js/atlantis.min.js') }}"></script>
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-{{-- <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
-<script src="{{ asset('assets/js/demo.js') }}"></script> --}}
 
 
-
-
-
-<script>
-Circles.create({
-    id:'circles-1',
-    radius:45,
-    value:60,
-    maxValue:100,
-    width:7,
-    text: 5,
-    colors:['#f1f1f1', '#FF9E27'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-Circles.create({
-    id:'circles-2',
-    radius:45,
-    value:70,
-    maxValue:100,
-    width:7,
-    text: 36,
-    colors:['#f1f1f1', '#2BB930'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-Circles.create({
-    id:'circles-3',
-    radius:45,
-    value:40,
-    maxValue:100,
-    width:7,
-    text: 12,
-    colors:['#f1f1f1', '#F25961'],
-    duration:400,
-    wrpClass:'circles-wrp',
-    textClass:'circles-text',
-    styleWrapper:true,
-    styleText:true
-})
-
-// var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
-
-// var mytotalIncomeChart = new Chart(totalIncomeChart, {
-//     type: 'bar',
-//     data: {
-//         labels: ["Senin", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-//         datasets : [{
-//             label: "Total Income",
-//             backgroundColor: '#ff9e27',
-//             borderColor: 'rgb(23, 125, 255)',
-//             data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-//         }],
-//     },
-//     options: {
-//         responsive: true,
-//         maintainAspectRatio: false,
-//         legend: {
-//             display: false,
-//         },
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     display: false //this will remove only the label
-//                 },
-//                 gridLines : {
-//                     drawBorder: false,
-//                     display : false
-//                 }
-//             }],
-//             xAxes : [ {
-//                 gridLines : {
-//                     drawBorder: false,
-//                     display : false
-//                 }
-//             }]
-//         },
-//     }
-// });
-
-// $('#lineChart').sparkline([105,103,123,100,95,105,115], {
-//     type: 'line',
-//     height: '70',
-//     width: '100%',
-//     lineWidth: '2',
-//     lineColor: '#ffa534',
-//     fillColor: 'rgba(255, 165, 52, .14)'
-// });
-</script>
 
 <script >
         $(document).ready(function() {
