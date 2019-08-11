@@ -60,7 +60,7 @@
                                 width="120px" alt=""> 
                             </td>
                             <td> {{ $post->title }} </td>
-                            <td> {{ $post->category->name }} </td>
+                            <td>  {{ $post->category->name }}</td>
                             <td>{{ $post->published_at }} |
                                 {!! $post->publicationLabel() !!}
                             </td>

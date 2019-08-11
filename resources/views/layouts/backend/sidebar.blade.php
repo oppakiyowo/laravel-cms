@@ -109,7 +109,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                        <a href="{{ route('categories.index') }}">
+                                        <a href="{{ route('tags.index') }}">
                                         <i class="fas fa-tag"></i>
                                             <p>Tags</p>
                                         </a>

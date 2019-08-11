@@ -26,7 +26,7 @@ class tagscontroller extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view ('errors.404');
     }
 
     /**
@@ -56,7 +56,7 @@ class tagscontroller extends Controller
      */
     public function show($id)
     {
-        //
+        return view ('errors.404');
     }
 
     /**
@@ -67,8 +67,8 @@ class tagscontroller extends Controller
      */
     public function edit($slug)
     {
-        $tag =Tag::where('slug', $slug)->FirstOrFail();
-        return view('tags.create')->with('tag', $tag);
+        // $tag =Tag::where('slug', $slug)->FirstOrFail();
+        // return view('tags.create')->with('tag', $tag);
         
     }
 
@@ -81,11 +81,10 @@ class tagscontroller extends Controller
      */
     public function update(UpdatetagsRequest $request, Tag $tag)
     {
-        $tag->update([
-            'name'=>$request->name,
-            'slug'=>$request->slug
-            
-        ]);
+        
+        $tag=Tag::findOrFail($request->catid);
+        $tag->update($request->all());
+       
 
         session()->flash('success', 'tag berhasil di ubah');
         return redirect(route('tags.index'));

@@ -113,4 +113,9 @@ class userscontroller extends Controller
         return redirect(route('users.index'));
     }
 
+
+    public function show($id)
+    {
+        return view ('errors.404');
+    }
 }

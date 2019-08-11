@@ -77,7 +77,7 @@ class postscontroller extends Controller
      */
     public function show($id)
     {
-        //
+        return view ('errors.404');
     }
 
     /**
@@ -144,17 +144,19 @@ class postscontroller extends Controller
         
         $post= Post::withTrashed()->where('id',$id)->firstOrFail();
 
-        if ($post->trashed()){
-            $post->deleteImage();
-            $post->forceDelete();
-            session()->flash('success', 'Post berhasil di delete permanen');
-        }else {
-            $post->delete();
-            session()->flash('success', 'Post berhasil Masuk ke Trash');
-        }
+        dd($category->all());
+
+    //     if ($post->trashed()){
+    //         $post->deleteImage();
+    //         $post->forceDelete();
+    //         session()->flash('success', 'Post berhasil di delete permanen');
+    //     }else {
+    //         $post->delete();
+    //         session()->flash('success', 'Post berhasil Masuk ke Trash');
+    //     }
 
        
-       return redirect(route('trashed-post.index'));
+    //    return redirect(route('trashed-post.index'));
     }
 
 
@@ -165,7 +167,7 @@ class postscontroller extends Controller
         $trashed =Post::onlyTrashed()->get();
 
         return view('posts.trash')->with('posts', $trashed);
-        
+       
     }
 
     public function restore($id)
