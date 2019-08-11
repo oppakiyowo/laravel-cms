@@ -26,7 +26,7 @@ class kategorycontroller extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        return view ('errors.404');
     }
 
     /**
@@ -56,7 +56,7 @@ class kategorycontroller extends Controller
      */
     public function show($id)
     {
-        //
+        return view ('errors.404');
     }
 
     /**
@@ -67,8 +67,8 @@ class kategorycontroller extends Controller
      */
     public function edit($slug)
     {
-        $category =Category::where('slug', $slug)->FirstOrFail();
-        return view('categories.create')->with('category', $category);
+        // $category =Category::where('slug', $slug)->FirstOrFail();
+        // return view('categories.create')->with('category', $category);
         
     }
 
@@ -81,11 +81,9 @@ class kategorycontroller extends Controller
      */
     public function update(UpdateCategoriesRequest $request, Category $category)
     {
-        $category->update([
-            'name'=>$request->name,
-            'slug'=>$request->slug
-        ]);
-
+        $category=Category::findOrFail($request->catid);
+        $category->update($request->all());
+       
         session()->flash('success', 'Kategori berhasil di ubah');
         return redirect(route('categories.index'));
     }
