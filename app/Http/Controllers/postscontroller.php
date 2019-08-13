@@ -144,19 +144,19 @@ class postscontroller extends Controller
         
         $post= Post::withTrashed()->where('id',$id)->firstOrFail();
 
-        dd($category->all());
+       
 
-    //     if ($post->trashed()){
-    //         $post->deleteImage();
-    //         $post->forceDelete();
-    //         session()->flash('success', 'Post berhasil di delete permanen');
-    //     }else {
-    //         $post->delete();
-    //         session()->flash('success', 'Post berhasil Masuk ke Trash');
-    //     }
+       if ($post->trashed()){
+          $post->deleteImage();
+           $post->forceDelete();
+          session()->flash('success', 'Post berhasil di delete permanen');
+       }else {
+             $post->delete();
+             session()->flash('success', 'Post berhasil Masuk ke Trash');
+        }
 
        
-    //    return redirect(route('trashed-post.index'));
+        return redirect(route('trashed-post.index'));
     }
 
 
