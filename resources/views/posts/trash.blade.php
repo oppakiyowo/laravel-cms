@@ -43,7 +43,6 @@
                         <tr>
                             <th>Image </th>
                             <th>Title</th>
-                            <th>Category</th>
                             <th width="220px">publish date</th>
                             @if(auth()->User()->isAdmin())
                             <th width="50px">Action</th>
@@ -60,7 +59,6 @@
                                 width="120px" alt=""> 
                             </td>
                             <td> {{ $post->title }} </td>
-                            <td>  {{ $post->category->name }}</td>
                             <td>{{ $post->published_at }} |
                                 {!! $post->publicationLabel() !!}
                             </td>
