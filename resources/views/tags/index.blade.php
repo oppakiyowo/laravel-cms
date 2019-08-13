@@ -38,6 +38,44 @@
                                 <i class="fa fa-plus"></i>
                                 Add Category
                             </button>
+                            {{-- add tag modal --}}
+<div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-bd">
+                <h5 class="modal-title">
+                    <span class="fw-mediumbold">
+                    Add</span> 
+                    <span class="fw-light">
+                        Tag
+                    </span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('tags.store') }}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default">
+                                <label>Tag Name</label>
+                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" name="name" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="modal-footer no-bd">
+                <button type="submit"  class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    {{-- end add tag modal --}}
                     </div>
                 </div> 
         <div class="card-body">
@@ -74,56 +112,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    @else
-                    <h3 class="text-center">No tag Yet</h3>
-                    @endif
-                </div>
-        </div>
-    </div>
-</div>
-                                    
-{{-- add tag modal --}}
-<div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header no-bd">
-            <h5 class="modal-title">
-                <span class="fw-mediumbold">
-                Add</span> 
-                <span class="fw-light">
-                    Tag
-                </span>
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form action="{{ route('tags.store') }}" method="POST">
-                @csrf
-                @method('POST')
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group form-group-default">
-                            <label>Tag Name</label>
-                            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" name="name" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="modal-footer no-bd">
-            <button type="submit"  class="btn btn-primary">Save changes</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </form>
-        </div>
-    </div>
-</div>
-</div>
-
-                                 
+                                                             
 {{-- edit tag modal  --}}
 <div class="modal fade" id="editTag" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -171,11 +160,8 @@
         </div>
     </div>
 </div>
-{{-- end of edit modal --}}      
-
-                                      
-                                   
- <!-- Modal -->
+{{-- end of edit modal --}}                                  
+ <!--Delete tag Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
  <div class="modal-dialog" role="document">
     <form action="" method="POST" id="deleteTagForm">
@@ -200,7 +186,20 @@
         </div>
  </div>
 </div>
-	  
+ <!--end Delete tag Modal -->	
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                    <h3 class="text-center">No tag Yet</h3>
+                    @endif
+                </div>
+        </div>
+    </div>
+</div>
+                                    
+
+  
 	  
 @endsection
 

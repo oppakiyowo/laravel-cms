@@ -36,6 +36,44 @@
                         <i class="fa fa-plus"></i>
                         Add Category
                     </button>
+                    {{-- add category modal --}}
+<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <form action="{{ route('categories.store') }}" method="POST">
+            @csrf
+            @method('POST')
+        <div class="modal-content">
+            <div class="modal-header no-bd">
+                <h5 class="modal-title">
+                    <span class="fw-mediumbold">
+                    Add</span> 
+                    <span class="fw-light">
+                        Category
+                    </span>
+                </h5> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group form-group-default">
+                            <label>Category Name</label>
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  />
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div class="modal-footer no-bd">
+                <button type="submit"  class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{{-- end of add category modal --}}
             </div>
         </div>
         <div class="card-body">
@@ -78,59 +116,7 @@
                     </div>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
-        </table>
-                @else
-                <h3 class="text-center">No Categories Yet</h3>
-                @endif
-            </div>
-        </div>
-    </div>
-</div>
-
-
-{{-- add category modal --}}
-<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <form action="{{ route('categories.store') }}" method="POST">
-                @csrf
-                @method('POST')
-            <div class="modal-content">
-                <div class="modal-header no-bd">
-                    <h5 class="modal-title">
-                        <span class="fw-mediumbold">
-                        Add</span> 
-                        <span class="fw-light">
-                            Category
-                        </span>
-                    </h5> 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group form-group-default">
-                                <label>Category Name</label>
-                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"  />
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                <div class="modal-footer no-bd">
-                    <button type="submit"  class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </form>
-                </div>
-            </div>
-        </div>
-        </div>
-{{-- end of add category modal --}}
-
-
-{{-- edit modal --}}
+                {{-- edit modal --}}
 <div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="{{ route('categories.update', $category->id) }}" data-remote="true" method="POST">
@@ -177,8 +163,6 @@
     </div>
 </div>
 {{-- end of edit modal --}}        
-            
-
 <!-- delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
     aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -203,6 +187,17 @@
                     <button type="summit" class="btn btn-danger">Ya,Hapus</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<!-- end delete Modal -->
+                @endforeach
+            </tbody>
+        </table>
+                @else
+                <h3 class="text-center">No Categories Yet</h3>
+                @endif
+            </div>
         </div>
     </div>
 </div>
