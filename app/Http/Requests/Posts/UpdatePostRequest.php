@@ -29,11 +29,11 @@ class UpdatePostRequest extends FormRequest
             'slug' => 'required|unique:posts,slug,'.$this->post['id'],
             'description'=>'required',
             'content' => 'required',
-            'category_id' => 'required'
-       
+            'category_id' => 'required',
+            'image' =>'image'
+
 
         ];
     }
 }
 
-       
