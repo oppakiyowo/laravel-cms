@@ -14,7 +14,7 @@
             <p class="opacity-70 text-uppercase small ls-1">{{ $post->category->name }}</p>
             <h1 class="display-4 mt-7 mb-8">{{ $post->title}}</h1>
             <p><span class="opacity-70 mr-1">By</span> <a class="text-white" href="#">
-            {{ $post->user->name}}  
+            {{ $post->user->name}}
             </a></p>
             <p><img class="avatar avatar-lg" src="{{ Gravatar::src($post->user->email) }}" alt="..."></p>
           </div>
@@ -43,10 +43,6 @@
                 </a>
                 @endforeach
               </div>
-              <a href="#disqus_thread"># COMMENTS</a>
-
-            
-           
             </div>
             <br><br>
             <div class="addthis_inline_share_toolbox">
@@ -63,26 +59,26 @@
       !-->
       <div class="section bg-gray">
           <div class="container">
-  
+
             <div class="row">
               <div class="col-lg-8 mx-auto">
 
                 <hr>
-  
-               
-        
+
+
+
                         <div id="disqus_thread"></div>
                         <script>
-                        
+
                         /**
                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-                        
+
                         var disqus_config = function () {
                         this.page.url = "{{config('app.url') }}/blog/posts{{ $post->id }}";  // Replace PAGE_URL with your page's canonical URL variable
                         this.page.identifier = "{{ $post->id}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
                         };
-                        
+
                         (function() { // DON'T EDIT BELOW THIS LINE
                         var d = document, s = d.createElement('script');
                         s.src = 'https://cerita-koding.disqus.com/embed.js';
@@ -91,16 +87,15 @@
                         })();
                         </script>
                         <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                
-  
+
+
               </div>
             </div>
-  
+
           </div>
         </div>
-  
+
 
     </main>
 @endsection
 
-   
