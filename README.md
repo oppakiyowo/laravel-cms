@@ -13,5 +13,5 @@ This is an open source of Content Management System developed with Laravel 5.8 f
 - php artisan serve
 
 ## Login
-- Email: user1@gmail.com
-- Password: 12345678 
+- Email: admin@admin.com
+- Password: admin 
